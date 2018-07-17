@@ -19,7 +19,6 @@
 </template>
 
 <script>
-
 export default {
     name: "location",
     data() {
@@ -33,7 +32,7 @@ export default {
                 title: "location.startUpdates",
                 event: "sp://location/startUpdates",
                 result: ""
-            },{
+            }, {
                 title: "location.stopUpdates",
                 event: "sp://location/stopUpdates",
                 result: ""
@@ -45,13 +44,8 @@ export default {
         event: function (index) {
             JSBridge(this.items[index].event, this.items[index].body)
                 .then(result => {
+                    this.items[index].title += "1";
                     this.items[index].result = result;
-                    this.$notify({
-                        title: '标题名称',
-                        message: h(this.items[index].event, {
-                            style: 'color: teal'
-                        }, result)
-                    })
                 })
                 .catch(err => {
                     this.items[index] = err;
