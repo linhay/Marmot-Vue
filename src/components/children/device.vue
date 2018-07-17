@@ -51,7 +51,7 @@ export default {
                         value: 0
                     },
                     slider: {
-                        max: 2,
+                        max: 3,
                         min: 0,
                         step: 1
                     },
