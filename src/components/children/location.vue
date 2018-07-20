@@ -20,37 +20,70 @@
 
 <script>
 export default {
-    name: "location",
-    data() {
-        return {
-            name: "location",
-            items: [{
-                title: "location.fetch",
-                event: "sp://location/fetch",
-                result: ""
-            }, {
-                title: "location.startUpdates",
-                event: "sp://location/startUpdates",
-                result: ""
-            }, {
-                title: "location.stopUpdates",
-                event: "sp://location/stopUpdates",
-                result: ""
-            }]
+  name: "location",
+  data() {
+    return {
+      name: "location",
+      items: [
+        {
+          title: "location.fetch",
+          type: "fetch",
+          event: "sp://location/fetch",
+          result: ""
+        },
+        {
+          title: "location.startUpdates",
+          type: "startUpdates",
+          event: "sp://location/startUpdates",
+          result: ""
+        },
+        {
+          title: "location.stopUpdates",
+          type: "stopUpdates",
+          event: "sp://location/stopUpdates",
+          result: ""
+        },
+        {
+          title: "location.select",
+          type: "select",
+          event: "sp://location/select",
+          result: ""
         }
-    },
+      ]
+    };
+  },
 
-    methods: {
-        event: function (index) {
-            JSBridge(this.items[index].event, this.items[index].body)
-                .then(result => {
-                    this.items[index].title += "1";
-                    this.items[index].result = result;
-                })
-                .catch(err => {
-                    this.items[index] = err;
-                });
-        }
+  methods: {
+    event: function(index) {
+      let type = this.items[index].type;
+
+      switch (type) {
+        case "fetch":
+          mt.location.fetch(res => {
+            this.items[0].result = res;
+          });
+          return;
+
+        case "startUpdates":
+          mt.location.startUpdates(res => {
+            this.items[1].result = res;
+          });
+          return;
+        case "stopUpdates":
+          mt.location.stopUpdates(res => {
+            this.items[2].result = res;
+          });
+          return;
+
+        case "select":
+          mt.location.select(res => {
+            this.items[3].result = res;
+          });
+          return;
+        default:
+          return;
+      }
     }
+  }
 };
 </script>

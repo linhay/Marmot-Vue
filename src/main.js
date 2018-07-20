@@ -6,6 +6,9 @@ import router from './router'
 import vConsole from './assets/vconsole'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import mt from './Native/location'
+
+window.mt = mt
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
